@@ -1,35 +1,30 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#ifndef CWRAP_STRUCTS_H
+#define CWRAP_STRUCTS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-typedef enum login_mode {
-    E_LOGIN_MODE_TCP = 0,    // TCP login, default
-    E_LOGIN_MODE_ANY = 1,    // No criteria login
-    E_LOGIN_MODE_SERVER_CONN = 2,    // auto sign up login
-    E_LOGIN_MODE_MULTICAST = 3,    // multicast login, default
-    E_LOGIN_MODE_UDP = 4,    // UDP method login
-    E_LOGIN_MODE_MAIN_CONN_ONLY = 6,    // only main connection login
-    E_LOGIN_MODE_SSL = 7,    // SSL encryption login
+// #TODO Hub for all others struct with their method;
+#include "buffer.h"
 
-    E_LOGIN_MODE_INTELLIGENT_BOX = 9,    // login IVS box remote device
-    E_LOGIN_MODE_NO_CONFIG = 10,   // login device do not config
-    E_LOGIN_MODE_U_LOGIN = 11,   // USB key device login
-    E_LOGIN_MODE_LDAP = 12,   // LDAP login
-    E_LOGIN_MODE_AD = 13,   // AD, ActiveDirectory,  login
-    E_LOGIN_MODE_RADIUS = 14,   // Radius  login
-    E_LOGIN_MODE_SOCKET_5 = 15,   // Socks5 login
-    E_LOGIN_MODE_CLOUD = 16,   // cloud login
-    E_LOGIN_MODE_AUTH_TWICE = 17,   // dual authentication loin
-    E_LOGIN_MODE_TS = 18,   // TS stream client login
-    E_LOGIN_MODE_P2P = 19,   // web private login
-    E_LOGIN_MODE_MOBILE = 20,   // mobile client login
-    E_LOGIN_MODE_TLS_ADAPTER = 21,   // adapter tls login
-    E_LOGIN_MODE_TLS_COMPEL = 22,   // compel tls login
-    E_LOGIN_MODE_TLS_MAIN_ONLY = 23,   // Partial TLS encryption
-    E_LOGIN_MODE_INVALID                   // invalid login
-} e_login_mode;
+typedef struct {
+    unsigned int year;
+    unsigned int month;
+    unsigned int day;
+    unsigned int hour;
+    unsigned int minute;
+    unsigned int second;
+} timestamp_t;
+
+typedef struct {
+    char* ip;
+    int port;
+    char* username;
+    char* password;
+
+    // Get/Set methods
+//    void (*setIP)(login_info* s, char* str);
+//    void (*setUsername)(login_info* s, char* str);
+//    void (*setPassword)(login_info* s, char* str);
+//    void (*setPort)(login_info* s, char* str);
+} login_info_t;
 
 typedef enum device_mode {
     TALK_CLIENT_MODE,                        // Set client-end mode to begin audio talk
@@ -77,35 +72,14 @@ typedef enum recquery_type {
 
 } e_recquery_type;
 
-struct login_info {
-    char ip[64];
-    int port;
-    char username[64];
-    char password[64];
-
-    // Get/Set methods
-//    void (*setIP)(login_info* s, char* str);
-//    void (*setUsername)(login_info* s, char* str);
-//    void (*setPassword)(login_info* s, char* str);
-//    void (*setPort)(login_info* s, char* str);
-};
-
-struct timestamp {
-    unsigned int year;
-    unsigned int month;
-    unsigned int day;
-    unsigned int hour;
-    unsigned int minute;
-    unsigned int second;
-};
-
+// INTERNAL - HIDDEN
 struct recfile_info {
     unsigned int ch;                        // Channel number
     char filename[124];            // File name
     unsigned int framenum;               // the total number of file frames
     unsigned int size;                    // File length, unit: Kunsigned char
-    struct timestamp starttime;                // Start time
-    struct timestamp endtime;                // End time
+    timestamp_t starttime;                // Start time
+    timestamp_t endtime;                // End time
     unsigned int driveno;                // HDD number
     unsigned int startcluster;            // Initial cluster number
     unsigned char nRecordFileType;        // Recorded file type  0:general record;1:alarm record ;2:motion detection;3:card number record ;4:image ; 19:Pos record ;255:all
@@ -114,8 +88,4 @@ struct recfile_info {
     unsigned char bRecType;               // 0-main stream record 1-sub1 stream record 2-sub2 stream record 3-sub3 stream record
 };
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif //STRUCTS_H
+#endif //CWRAP_STRUCTS_H

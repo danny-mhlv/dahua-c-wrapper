@@ -1,6 +1,9 @@
 #ifndef CWRAP_MT_FUNCS_H
 #define CWRAP_MT_FUNCS_H
 
-void* th_login(void* login_info);
+#include <dahua/dhnetsdk.h>
+#include "structs.h"
+
+void* th_login(void* info);
 
 #endif //CWRAP_MT_FUNCS_H
