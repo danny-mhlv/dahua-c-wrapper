@@ -1,8 +1,5 @@
-//
-// Created by danny on 13.01.23.
-//
-
 #include "../library/library.h"
+#include "stdio.h"
 
 int main() {
     if (!SDK_init()) {
@@ -10,26 +7,30 @@ int main() {
         return 1;
     }
 
-    long login_id = connect_param("admin", "12345678a", "192.168.1.250", 37777);
+    long login_id = connect_p("admin", "12345678a", "192.168.1.250", 37777);
     if (!login_id) {
         printf("%x", get_error());
         return 2;
     }
 
-    buffer buff;
+    w_buffer_t buff;
     init_buff(&buff, 2 * 1024 * 1024);
     get_data(login_id,
              BOTH,
-             &(dtstamp){ .year = 2023, .month = 1, .day = 17, .hour = 12, .min = 42, .sec = 0 },
-             &(dtstamp){ .year = 2023, .month = 1, .day = 17, .hour = 12, .min = 43, .sec = 0 },
+             &(w_datetime_t){ .year = 2023, .month = 1, .day = 18, .hour = 12, .minute = 42, .sec = 0 },
+             &(w_datetime_t){ .year = 2023, .month = 1, .day = 18, .hour = 12, .minute = 43, .sec = 0 },
              &buff);
 
     disconnect(login_id);
 
-    FILE* file = fopen("./myvid.dav", "wb");
-    fwrite(buff.data, sizeof(byte), buff.size, file);
-    fclose(file);
+    FILE* file = fopen("/home/danny/clibgo/test_exec/myvid.dav", "wb");
+    if (!file) {
+        printf("Failed to open file!\n");
+        return 3;
+    }
 
+    fwrite(buff.data, sizeof(buff.data[0]), buff.pos, file);
+    fclose(file);
 
     SDK_cleanup();
     return 0;

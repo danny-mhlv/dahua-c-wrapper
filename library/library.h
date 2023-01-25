@@ -5,11 +5,9 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
-#include <dahua/dhnetsdk.h>
+#include "../wrapper/wrapper.h"
 
 #include "structs.h"
-#include "mt-funcs.h"
-#include "callbacks.h"
 
 /**
  * Default SDK initializer function
@@ -26,7 +24,7 @@ void SDK_cleanup();
  * @param info
  * @return Non-zero login ID of the established connection on success
  */
-long connect(login_info_t* info);
+long connect_s(w_login_info_t* info);
 
 /**
  * Connect to the specific camera using given credentials
@@ -36,14 +34,14 @@ long connect(login_info_t* info);
  * @param port Port number
  * @return Non-zero login ID of the established connection on success
  */
-long connect_param(const char* username, const char* password, const char* ip, unsigned short port);
+long connect_p(const char* username, const char* password, const char* ip, unsigned short port);
 
 /**
  * Close the connection
  * @param login_id
  * @return true on success
  */
-long disconnect(long login_id);
+bool disconnect(long login_id);
 
 /**
  * Get and save time-framed video data to buffer
@@ -53,7 +51,7 @@ long disconnect(long login_id);
  * @param end End timestamp
  * @param data_buff Buffer to save to
  */
-void get_data(long login_id, enum recstream_type type, timestamp_t* start, timestamp_t* end, buffer* data_buff);
+void get_data(long login_id, enum recstream_type type, w_datetime_t* start, w_datetime_t* end, w_buffer_t* data_buff);
 
 /**
  * Get the last occurred error

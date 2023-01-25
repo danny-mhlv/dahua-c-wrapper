@@ -1,48 +1,51 @@
 #include "library.h"
+#include "malloc.h"
 
 bool SDK_init() {
-    return CLIENT_Init(NULL, 0);
+    return DH_Init((void*)NULL, 0);
 }
 
 void SDK_cleanup() {
-    CLIENT_Cleanup();
+    return DH_Cleanup();
 }
 
-long connect(login_info_t* info) {
-    pthread_t th;
-    pthread_create(&th, NULL, th_login, info);
-    pthread_join(th, NULL);
+long connect_s(w_login_info_t* info) {
+    return DH_Login(info);
 }
 
-long connect_param(const char* username, const char* password, const char* ip, unsigned short port) {
-    login_info_t info;
-    info.port = port;
-    strcpy(info.ip, ip);
-    strcpy(info.username, username);
-    strcpy(info.password, password);
+long connect_p(const char* username, const char* password, const char* ip, unsigned short port) {
+    w_login_info_t* const info = (w_login_info_t*)calloc(1, sizeof(w_login_info_t));
+    info->port = port;
+    strncpy(info->ip, ip, 64);
+    strncpy(info->user, username, 64);
+    strncpy(info->pass, password, 64);
 
-    pthread_t th;
-    pthread_create(&th, NULL, th_login, &info);
-    pthread_join(th, NULL);
+    long id = DH_Login(info);
+    free(info);
+    return id;
 }
 
-long disconnect(long login_id) {
-    CLIENT_Logout(login_id);
+bool disconnect(long login_id) {
+    return DH_Logout(login_id);
 }
 
-void get_data(long login_id, enum recstream_type type, timestamp_t* start, timestamp_t* end, buffer* data_buff) {
-    CLIENT_SetDeviceMode(login_id, RECORD_STREAM_TYPE, &type);
+void get_data(long login_id, enum recstream_type type, w_datetime_t* start, w_datetime_t * end, w_buffer_t* data_buff) {
+    if(!DH_SetDeviceMode(login_id, RECORD_STREAM_TYPE, &type)) {
+        printf("Device Mode not set!\n");
+        return;
+    }
 
     bool loading = true;
-    long handle = CLIENT_DownloadByTimeEx(login_id, 0, ALL, (struct timestamp*)start, (struct timestamp*)end, NULL,
-                                          cb_default_download_pos, (long)(&loading),
-                                          cb_default_download_buff, (long)(&data_buff));
+    long handle = DH_Download(login_id, 0, ALL, start, end, NULL,
+                                          BOTH_DEFAULT,
+                                          NULL, data_buff,
+                                          NULL, &loading);
 
     while (loading);
 
-    CLIENT_StopDownload(handle);
+    DH_StopDownload(handle);
 }
 
 unsigned int get_error() {
-    return CLIENT_GetLastError();
+    return DH_GetLastError();
 }

@@ -1,9 +1,6 @@
 #ifndef CWRAP_STRUCTS_H
 #define CWRAP_STRUCTS_H
 
-// #TODO Hub for all others struct with their method;
-#include "buffer.h"
-
 typedef struct {
     unsigned int year;
     unsigned int month;
@@ -25,24 +22,6 @@ typedef struct {
 //    void (*setPassword)(login_info* s, char* str);
 //    void (*setPort)(login_info* s, char* str);
 } login_info_t;
-
-typedef enum device_mode {
-    TALK_CLIENT_MODE,                        // Set client-end mode to begin audio talk
-    TALK_SERVER_MODE,                        // Set server mode to begin audio talk
-    TALK_ENCODE_TYPE,                        // Set encode format for audio talk
-    ALARM_LISTEN_MODE,                        // Set alarm subscribe way
-    CONFIG_AUTHORITY_MODE,                    // Set user right to realize configuration management
-    TALK_TALK_CHANNEL,                        // set talking channel(0~MaxChannel-1)
-    RECORD_STREAM_TYPE,                      // set the stream type of the record for query(0-both main and extra stream,1-only main stream,2-only extra stream)
-    TALK_SPEAK_PARAM,                        // set speaking parameter,corresponding to NET_SPEAK_PARAM
-    RECORD_TYPE,                             // Set by time video playback and download the video file TYPE (see.net RECORD TYPE)
-    TALK_MODE3,                                // Set voice intercom parameters of three generations of equipment and the corresponding structure NET TALK the EX
-    PLAYBACK_REALTIME_MODE,                 // set real time playback function(0-off, 1-on)
-    TALK_TRANSFER_MODE,                      // Judge the voice intercom if it was a forwarding mode, (corresponding to  NET_TALK_TRANSFER_PARAM)
-    TALK_VT_PARAM,                           // Set VT Talk param (corresponding to  NET_VT_TALK_PARAM)
-    TARGET_DEV_ID,                           // set target device identifier for searching system capacity information, (not zero - locate device forwards the information)
-    AUDIO_RECORD_LENGTH = 15,                // set audio record length, corresponding to a int
-} e_device_mode;
 
 typedef enum recstream_type {
     BOTH = 0,
