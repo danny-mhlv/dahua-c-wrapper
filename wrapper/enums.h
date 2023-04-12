@@ -2,6 +2,50 @@
 #define ENUMS_H
 
 /**
+ * Type of file to query for downloading
+ * @dahua_name tagEmQueryRecordType
+ * @param RECORD_TYPE_ALL - all recorded videos
+ * @param RECORD_TYPE_ALARM - external alarm video
+ * @param RECORD_TYPE_MOTION_DETECT - motion detection alarm
+ * @param RECORD_TYPE_ALARM_ALL - all alarm videos
+ * @param RECORD_TYPE_CARD - query video by the card number ?
+ * @param RECORD_TYPE_CONDITION - query video by condition ?
+ * @param RECORD_TYPE_JOIN - combination query ?
+ * @param RECORD_TYPE_CARD_PICTURE - query pictures by the card number, used by HB-U,NVS ?
+ * @param RECORD_TYPE_PICTURE - query pictures, used by HB-U,NVS ?
+ * @param RECORD_TYPE_FIELD = query by field ?
+ * @param RECORD_TYPE_INTELLI_VIDEO - smart record search ?
+ * @param RECORD_TYPE_NET_DATA - query network data, used by Jinqiao Internet Bar ?
+ * @param RECORD_TYPE_TRANS_DATA - query the video of serial data ?
+ * @param RECORD_TYPE_IMPORTANT - query important video ?
+ * @param RECORD_TYPE_TALK_DATA - query recording file ? (probably audio record?)
+ * @param RECORD_TYPE_POS - query pos record ?
+ * @param RECORD_TYPE_INVALID - invalid query type ?
+ */
+enum query_record_type {
+    RECORD_TYPE_ALL = 0,
+    RECORD_TYPE_ALARM,
+    RECORD_TYPE_MOTION_DETECT,
+    RECORD_TYPE_ALARM_ALL,
+    RECORD_TYPE_CARD,
+    RECORD_TYPE_CONDITION,
+    RECORD_TYPE_JOIN,
+
+    RECORD_TYPE_CARD_PICTURE = 8,
+    RECORD_TYPE_PICTURE,
+    RECORD_TYPE_FIELD,
+    RECORD_TYPE_INTELLI_VIDEO,
+
+    RECORD_TYPE_NET_DATA = 15,
+    RECORD_TYPE_TRANS_DATA,
+    RECORD_TYPE_IMPORTANT,
+    RECORD_TYPE_TALK_DATA,
+    RECORD_TYPE_POS,
+
+    RECORD_TYPE_INVALID = 256,
+};
+
+/**
  * @enum Transmission Service Type
  * @param SERVICE_UNKNOWN - Unknown
  * @param SERVICE_TCP - TCP
