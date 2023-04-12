@@ -39,25 +39,13 @@ int DH_SetDeviceMode(long login_id, use_device_mode mode, void* value) {
     return CLIENT_SetDeviceMode(login_id, (EM_USEDEV_MODE)mode, value);
 }
 
-long DH_DownloadByTime(long login_id, int channel_id, int recfile_type,
-                       struct timestamp* start, struct timestamp* end, char* sfile_path,
-                       download_pos_cb_t cb_download_pos, long pos_user_param,
-                       download_data_cb_t cb_download_data, long data_user_param) {
-    return CLIENT_DownloadByTimeEx(login_id, channel_id, recfile_type,
-                                   (NET_TIME*)start, (NET_TIME*)end, sfile_path,
-                                   (fTimeDownLoadPosCallBack)cb_download_pos, pos_user_param,
-                                   (fDataCallBack)cb_download_data, data_user_param);
-}
-
-int DH_StopDownload(long handle) {
-    return CLIENT_StopDownload(handle);
+int DH_StopDownload(long download_handle) {
+    return CLIENT_StopDownload(download_handle);
 }
 
 unsigned int DH_GetLastError() {
     return CLIENT_GetLastError();
 }
-
-#include <iostream>
 
 dh_getcam_out* DH_GetCameras(long login_id, int max_cameras) {
     auto* in = new dh_getcam_in;
@@ -96,7 +84,6 @@ int DH_GetDevConfig(long login_id, unsigned int command, int channel, void* outB
     }
 
     unsigned long x = sizeof(DHDEV_DECODER_URL_CFG);
-    printf("Error Hex: %X\n", CLIENT_GetLastError());
     return 0;
 }
 
@@ -107,8 +94,6 @@ int DH_GetConfigJSON(long login_id, char* command, int channel, char* outBuff,
         return 1;
     }
 
-    printf("Error Hex: %X\n", CLIENT_GetLastError());
-    printf("Error Int: %d\n", error);
     return 0;
 }
 
@@ -128,6 +113,26 @@ int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize)
         return bytesReturned;
     }
 
-    printf("Error Hex: %X\n", CLIENT_GetLastError());
     return 0;
+}
+
+int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type, struct time_stamp *from,
+                       struct time_stamp *to, char *save_path) {
+    int streamType = 0;
+    bool loading = true;
+
+    DH_SetDeviceMode(login_id, MODE_RECORD_STREAM_TYPE, &streamType);
+    long handle = CLIENT_DownloadByTimeEx(login_id, channel_id, (EM_QUERY_RECORD_TYPE)type,
+                            (NET_TIME*)from, (NET_TIME*)to, nullptr,
+                            (fTimeDownLoadPosCallBack)default_cb_download_pos, (long)&loading,
+                            (fDataCallBack) default_cb_download_data, (long)save_path);
+
+    if (handle) {
+        while (loading) {}
+        DH_StopDownload(handle);
+    }
+
+    if (DH_GetLastError() != 0) return 0;
+
+    return 1;
 }

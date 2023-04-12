@@ -4,7 +4,7 @@
 #include "data-structures/structs.h"
 #include "constants/config-commands.h"
 #include "enums.h"
-#include "funcs.h"
+#include "callbacks.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,52 +21,24 @@ int DH_Logout(long login_id);
 // Device interaction
 int DH_SetDeviceMode(long login_id, enum use_device_mode mode, void* value);
 
-/**
- *
- * @param login_id Login ID of an active connection
- * @param channel_id
- * @param recfile_type
- * @param start
- * @param end
- * @param sfile_path
- * @param cb_download_pos
- * @param pos_user_param
- * @param cb_download_data
- * @param data_user_param
- * @return Download handle
- */
-long DH_DownloadByTime(long login_id, int channel_id, int recfile_type,
-                       struct time_stamp* start, struct time_stamp* end, char* sfile_path,
-                       download_pos_cb_t cb_download_pos, long pos_user_param,
-                       download_data_cb_t cb_download_data, long data_user_param);
+int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type,
+                       struct time_stamp* from, struct time_stamp* to, char* save_path);
 
-int DH_StopDownload(long handle);
+int DH_StopDownload(long download_handle);
 
 unsigned int DH_GetLastError();
 
 // DVR functionality
 struct dh_getcam_out* DH_GetCameras(long login_id, int max_cameras);
 
-/**
- *
- * @param login_id - Login ID
- * @param command - <a href="config-constants.h">Config Constants Reference</a>
- * @param channel
- * @param outBuff
- * @param outBuffSize
- * @return
- */
 int DH_GetDevConfig(long login_id, unsigned int command, int channel, void* outBuff,
                     unsigned int outBuffSize);
-
-//int DH_GetNewDevConfig(long login_id, char* szCommand, int channel,
-//                       char* outBuffer, unsigned int outBufferSize, int *error);
-
-int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
 
 int DH_GetConfigJSON(long login_id, char* command, int channel, char* outBuff, unsigned int outBuffSize);
 
 int DH_ParseConfigJSON(char* command, char* inBuff, void* outBuffer, unsigned int outBuffSize);
+
+int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
 
 /**
  * FOR WS Messaging about new recordings (test, not sure if this shit works)

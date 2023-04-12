@@ -29,21 +29,35 @@ struct login_info {
 };
 
 /**
- * @dahua_name
+ * Record file info
+ * @dahua_name tagNET_RECORDFILE_INFO
+ * @param channel - channel number
+ * @param fileName - file name
+ * @param frameCount - total number of file frames
+ * @param fileSize - file size in bytes
+ * @param startTime - start time
+ * @param endTime - end time
+ * @param driveNumber - HDD number
+ * @param startClusterNumber - initial cluster number
+ * @param recordType - recorded file type | general (0), alarm (1),
+ * motion detection (2), card number record (3), image (4), pos record (19), all (255)
+ * @param isImportant - general (0) or important (1)
+ * @param hint - document indexing ?
+ * @param streamType - main-stream (0), sub-stream 1 (1), sub-stream 2 (2), sub-stream 3 (3)
  */
-struct recfile_info {
-    unsigned int ch;                        // Channel number
-    char filename[124];            // File name
-    unsigned int framenum;               // the total number of file frames
-    unsigned int size;                    // File length, unit: Kunsigned char
-    struct time_stamp starttime;                // Start time
-    struct time_stamp endtime;                // End time
-    unsigned int driveno;                // HDD number
-    unsigned int startcluster;            // Initial cluster number
-    unsigned char nRecordFileType;        // Recorded file type  0:general record;1:alarm record ;2:motion detection;3:card number record ;4:image ; 19:Pos record ;255:all
-    unsigned char bImportantRecID;        // 0:general record 1:Important record
-    unsigned char bHint;                    // Document Indexing
-    unsigned char bRecType;               // 0-main stream record 1-sub1 stream record 2-sub2 stream record 3-sub3 stream record
+struct record_info {
+    unsigned int channel;
+    char fileName[124];
+    unsigned int frameCount;
+    unsigned int fileSize;
+    struct time_stamp startTime;
+    struct time_stamp endTime;
+    unsigned int driveNumber;
+    unsigned int startClusterNumber;
+    unsigned char recordType;
+    unsigned char isImportant;
+    unsigned char hint;
+    unsigned char streamType;
 };
 
 #ifdef __cplusplus
