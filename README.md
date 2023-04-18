@@ -1,5 +1,9 @@
 # Dahua SDK/API Wrapper
 
+⚠️ Attention! This wrapper is still under construction, so use with caution! ⚠️
+
+### HELP WANTED
+
 ***Important!***
 
 Before compiling this wrapper-library make sure
