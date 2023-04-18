@@ -40,15 +40,6 @@ int DH_ParseConfigJSON(char* command, char* inBuff, void* outBuffer, unsigned in
 
 int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
 
-/**
- * FOR WS Messaging about new recordings (test, not sure if this shit works)
- */
-/////@brief order record  change port,user malloc memory of pInParam and pOutParam
-//CLIENT_NET_API LLONG CALL_METHOD CLIENT_AttachRecordUpdater(LLONG lLoginID, const NET_IN_RECORDUPDATER_DATA* pInParam, NET_OUT_RECORDUPDATER_DATA* pOutParam, int nWaitTime);
-//
-/////@brief stoporder record  change port
-//CLIENT_NET_API BOOL CALL_METHOD CLIENT_DetachRecordUpdater(LLONG lAttachHandle);
-
 #ifdef __cplusplus
 }
 #endif
