@@ -1,6 +1,11 @@
 #ifndef COMMON_CONSTANTS_H
 #define COMMON_CONSTANTS_H
 
+// Macros for numerous "reserved[]" fields in structures
+#define CONCAT(x, y) x ## y
+#define EXPAND(x, y) CONCAT(x, y)
+#define RESERVED EXPAND(reserved, __LINE__)
+
 #define DH_DEVICE_ID_LEN 128
 #define DH_DEVICE_NAME_LEN 64
 

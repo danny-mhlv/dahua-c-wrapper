@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+// #TODO remove all out-* params and replace it with proper return type
+
 // Initialization
 int DH_SDK_Init(disconnect_cb_t cb_disconnect, long user_param); // #TODO Change long to pointer
 void DH_SDK_Cleanup();
@@ -40,14 +42,11 @@ int DH_ParseConfigJSON(char* command, char* inBuff, void* outBuffer, unsigned in
 
 int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
 
-/**
- * FOR WS Messaging about new recordings (test, not sure if this shit works)
- */
-/////@brief order record  change port,user malloc memory of pInParam and pOutParam
-//CLIENT_NET_API LLONG CALL_METHOD CLIENT_AttachRecordUpdater(LLONG lLoginID, const NET_IN_RECORDUPDATER_DATA* pInParam, NET_OUT_RECORDUPDATER_DATA* pOutParam, int nWaitTime);
-//
-/////@brief stoporder record  change port
-//CLIENT_NET_API BOOL CALL_METHOD CLIENT_DetachRecordUpdater(LLONG lAttachHandle);
+void DH_SetEventListener(event_listen_cb_t callback, long user_param);
+
+int DH_StartEventListen(long login_id);
+
+int DH_StopEventListen(long login_id);
 
 #ifdef __cplusplus
 }

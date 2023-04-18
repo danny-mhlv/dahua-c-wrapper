@@ -32,6 +32,11 @@ typedef void(download_pos_cb_t)(long handle, unsigned int total_size, unsigned i
 typedef void(video_stream_cb_t)(long handle, unsigned int data_type, unsigned char* buff,
                                 unsigned int buff_size, long data, long user_param);
 
+/**
+ * @dahua_name fMessCallBackEx2
+ */
+typedef int(event_listen_cb_t)(struct event_listen_cb_info* info, long user_param);
+
 // Default callback functions declarations
 // Note: "[N/U]" flag indicates that callback definition
 // does not use marked parameters
