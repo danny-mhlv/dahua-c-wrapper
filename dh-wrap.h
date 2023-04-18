@@ -10,6 +10,8 @@
 extern "C" {
 #endif
 
+// #TODO remove all out-* params and replace it with proper return type
+
 // Initialization
 int DH_SDK_Init(disconnect_cb_t cb_disconnect, long user_param); // #TODO Change long to pointer
 void DH_SDK_Cleanup();
@@ -39,6 +41,12 @@ int DH_GetConfigJSON(long login_id, char* command, int channel, char* outBuff, u
 int DH_ParseConfigJSON(char* command, char* inBuff, void* outBuffer, unsigned int outBuffSize);
 
 int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
+
+void DH_SetEventListener(event_listen_cb_t callback, long user_param);
+
+int DH_StartEventListen(long login_id);
+
+int DH_StopEventListen(long login_id);
 
 #ifdef __cplusplus
 }

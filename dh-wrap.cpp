@@ -136,3 +136,16 @@ int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type
 
     return 1;
 }
+
+void DH_SetEventListener(event_listen_cb_t callback, long user_param) {
+    CLIENT_SetDVRMessCallBackEx2((fMessCallBackEx2)callback, user_param);
+}
+
+int DH_StartEventListen(long login_id) {
+    return CLIENT_StartListenEx(login_id);
+}
+
+int DH_StopEventListen(long login_id) {
+    return CLIENT_StopListen(login_id);
+
+}
