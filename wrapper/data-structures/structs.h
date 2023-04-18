@@ -6,5 +6,6 @@
 #include "video-structs.h"
 #include "device-structs.h"
 #include "config-structs.h"
+#include "event-structs.h"
 
 #endif // STRUCTS_H
