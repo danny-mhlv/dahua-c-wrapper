@@ -6,8 +6,7 @@ set(WRAPPER_NAME ${PROJECT_NAME})
 
 set(${WRAPPER_NAME}_SRC
         src/dh-wrap.cpp
-        src/default-callbacks.cpp
-        src/utils.cpp src/utils.h)
+        src/default-callbacks.cpp)
 
 set(${WRAPPER_NAME}_INC
         include/dh-wrap.h
