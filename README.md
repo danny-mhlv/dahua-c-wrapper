@@ -11,6 +11,19 @@ that `dhnetsdk.h` and `dhconfigsdk.h` do not overlap!
 Known issue is `#define` macros and `typedef`s overlapping each other in mentioned files.
 There is no workaround, unfortunately :(
 
+## Build
+1. Install Dahua SDK libraries via official Dahua download page
+2. Clone the code
+```shell
+git clone https://github.com/danny-mhlv/dahua-c-wrapper.git dahua-wrapper
+```
+3. Build the wrapper
+```shell
+cd dahua-wrapper
+mkdir build && cd build
+cmake .. && cmake --install .
+```
+
 ## Wrapper
 
 The goal this wrapper-library tries to achieve - is to remove
@@ -24,7 +37,7 @@ Examples:
 ```C
 ```
 
-For now it is `C` **only!**
+For now, it is `C` **only!**
 
 ## TODO
 

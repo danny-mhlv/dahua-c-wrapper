@@ -339,4 +339,45 @@ enum use_device_mode {
     MODE_AUDIO_RECORD_LENGTH = 15,
 };
 
+/**
+ * Metadata mark of the snapshot/video record file
+ * @dahua_name _EM_RECORD_SNAP_FLAG_TYPE
+ * @param METAMARK_TYPE_UNKNOWN - Unknown file type
+ * @param METAMARK_TYPE_TIMING - ???
+ * @param METAMARK_TYPE_MANUAL - Manual ?
+ * @param METAMARK_TYPE_IMPORTANT - Marked as "Important"
+ * @param METAMARK_TYPE_EVENT - Event
+ * @param METAMARK_TYPE_COMBINED - Combined
+ * @param METAMARK_TYPE_CUTOUT - Cut
+ * @param METAMARK_TYPE_LEAVE_WORD - Message
+ * @param METAMARK_TYPE_TALKBACK_LOCAL - Talk local
+ * @param METAMARK_TYPE_TALKBACK_REMOTE - Talk remote
+ * @param METAMARK_TYPE_COMPRESSED - Compressed video
+ * @param METAMARK_TYPE_ORIGINAL - Original video
+ * @param METAMARK_TYPE_PROCESSED - Processed
+ * @param METAMARK_TYPE_BLACK_PLATE_PIC - Blacklist picture
+ * @param METAMARK_TYPE_ORIGINAL_PIC - Original picture
+ * @param METAMARK_TYPE_CARD - Card number
+ * @param METAMARK_TYPE_MAX - ???
+ */
+enum record_metamark_type {
+    METAMARK_TYPE_UNKNOWN = -1,
+    METAMARK_TYPE_TIMING,
+    METAMARK_TYPE_MANUAL,
+    METAMARK_TYPE_IMPORTANT,
+    METAMARK_TYPE_EVENT,
+    METAMARK_TYPE_COMBINED,
+    METAMARK_TYPE_CUTOUT,
+    METAMARK_TYPE_LEAVE_WORD,
+    METAMARK_TYPE_TALKBACK_LOCAL,
+    METAMARK_TYPE_TALKBACK_REMOTE,
+    METAMARK_TYPE_COMPRESSED,
+    METAMARK_TYPE_ORIGINAL,
+    METAMARK_TYPE_PROCESSED,
+    METAMARK_TYPE_BLACK_PLATE_PIC,
+    METAMARK_TYPE_ORIGINAL_PIC,
+    METAMARK_TYPE_CARD,
+    METAMARK_TYPE_MAX = 128,
+};
+
 #endif // ENUMS_H

@@ -651,14 +651,14 @@
 #define EVENT_RTSC_TRAFFIC				   0x5004      // Signal traffic information event (corresponding to ALARM_RTSC_TRAFFIC_INFO)
 
 // HY alarm event
-#define EVENT_HY_FIRE_DETECTION             0x6001      // Fire flame detection events (corresponding to ALARM_HY_FIRE_DETECTION_INFO)
-#define EVENT_HY_SMOG_DETECTION             0x6002      // Fire smoke detection events (corresponding to ALARM_HY_SMOG_DETECTION_INFO)
-#define EVENT_HY_INFIRE_PASSAGE_DETECTION   0x6003      // Fire evacuation passage blocking event (corresponding to ALARM_HY_INFIRE_PASSAGE_DETECTION_INFO)
-#define EVENT_HY_OUTFIRE_PASSAGE_DETECTION  0x6004      // Occupation of fire-fighting vehicle passageway/occupation of fire-fighting climbing surface (corresponding to ALARM_HY_OUTFIRE_PASSAGE_DETECTION_INFO)
-#define EVENT_HY_MAN_LEAVING_DETECTION      0x6005      // Personnel leaving the fire control room (corresponding to ALARM_HY_MAN_LEAVING_DETECTION_INFO)
-#define EVENT_HY_FIRE_CONTROL_OFFLINE_FAULT 0x6006      // Fire contol offline fault(corresponding to ALARM_HY_FIRE_CONTROL_OFFLINE_FAULT_INFO)
-#define EVENT_HY_FIRE_CONTROL_SENSOR_FAULT  0x6007      // Fire contol sensor fault(corresponding to ALARM_HY_FIRE_CONTROL_SENSOR_FAULT_INFO)
-#define EVENT_HY_FIRE_CONTROL_DISMANTLE_FAULT    0x6008      // Fire contol dismantle fault(corresponding to ALARM_HY_FIRE_CONTROL_DISMANTLE_FAULT_INFO)
+#define EVENT_HYBRID_FIRE_DETECTION             0x6001      // Fire flame detection events (corresponding to ALARM_HY_FIRE_DETECTION_INFO)
+#define EVENT_HYBRID_SMOG_DETECTION             0x6002      // Fire smoke detection events (corresponding to ALARM_HY_SMOG_DETECTION_INFO)
+#define EVENT_HYBRID_INFIRE_PASSAGE_DETECTION   0x6003      // Fire evacuation passage blocking event (corresponding to ALARM_HY_INFIRE_PASSAGE_DETECTION_INFO)
+#define EVENT_HYBRID_OUTFIRE_PASSAGE_DETECTION  0x6004      // Occupation of fire-fighting vehicle passageway/occupation of fire-fighting climbing surface (corresponding to ALARM_HY_OUTFIRE_PASSAGE_DETECTION_INFO)
+#define EVENT_HYBRID_MAN_LEAVING_DETECTION      0x6005      // Personnel leaving the fire control room (corresponding to ALARM_HY_MAN_LEAVING_DETECTION_INFO)
+#define EVENT_HYBRID_FIRE_CONTROL_OFFLINE_FAULT 0x6006      // Fire contol offline fault(corresponding to ALARM_HY_FIRE_CONTROL_OFFLINE_FAULT_INFO)
+#define EVENT_HYBRID_FIRE_CONTROL_SENSOR_FAULT  0x6007      // Fire contol sensor fault(corresponding to ALARM_HY_FIRE_CONTROL_SENSOR_FAULT_INFO)
+#define EVENT_HYBRID_FIRE_CONTROL_DISMANTLE_FAULT    0x6008      // Fire contol dismantle fault(corresponding to ALARM_HY_FIRE_CONTROL_DISMANTLE_FAULT_INFO)
 
 // Security inspection alarm events
 #define EVENT_XRAY_PIP_COMMUNICATION_ABNORMITY		0x7001			// XRayPIPCommunicationAbnormity(corresponding to ALARM_XRAY_PIP_COMMUNICATION_ABNORMITY_INFO)

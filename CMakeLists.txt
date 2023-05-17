@@ -1,17 +1,35 @@
 cmake_minimum_required(VERSION 3.24)
-project(dahua-c-wrapper)
+project(dahua-c-wrapper LANGUAGES C CXX)
+include(GNUInstallDirs)
 
-set(USER_DAHUA_PATH_LIB "/usr/local/lib/dahua" CACHE STRING "Path to Dahua library files")
-set(USER_DAHUA_PATH_INC "/usr/local/include/dahua" CACHE STRING "Path to Dahua include files")
+set(WRAPPER_NAME ${PROJECT_NAME})
 
-add_library(wrapper SHARED dh-wrap.cpp default-callbacks.cpp)
+set(${WRAPPER_NAME}_SRC
+        src/dh-wrap.cpp
+        src/default-callbacks.cpp
+        src/utils.cpp src/utils.h)
 
-target_link_options(wrapper PUBLIC -Wl,--no-as-needed -Wl,--export-dynamic)
+set(${WRAPPER_NAME}_INC
+        include/dh-wrap.h
+)
 
-target_include_directories(wrapper
-        PUBLIC ${USER_DAHUA_PATH_INC})
+add_library(${WRAPPER_NAME} SHARED ${${WRAPPER_NAME}_SRC} ${${WRAPPER_NAME}_INC})
 
-target_link_directories(wrapper
-        PUBLIC ${USER_DAHUA_PATH_LIB})
+target_link_options(${WRAPPER_NAME} PUBLIC -Wl,--no-as-needed -Wl,--export-dynamic)
 
-target_link_libraries(wrapper dhnetsdk dhconfigsdk)
+# External dependency (Original Dahua library)
+target_include_directories(${WRAPPER_NAME}
+        PUBLIC "${CMAKE_INSTALL_INCLUDEDIR}/dahua")
+target_link_directories(${WRAPPER_NAME}
+        PUBLIC "${CMAKE_INSTALL_LIBDIR}")
+target_link_libraries(${WRAPPER_NAME} dhnetsdk dhconfigsdk)
+
+install(TARGETS ${WRAPPER_NAME}
+        EXPORT ${WRAPPER_NAME}
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/${WRAPPER_NAME}"           COMPONENT shlib
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${WRAPPER_NAME}" COMPONENT dev
+)
+
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/include" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${WRAPPER_NAME}"
+        FILES_MATCHING PATTERN "*.h"
+)
