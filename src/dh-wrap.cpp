@@ -1,7 +1,7 @@
 #include <dahua/dhnetsdk.h>
 #include <dahua/dhconfigsdk.h>
 #include <cstring>
-#include "dh-wrap.h"
+#include "../include/dh-wrap.h"
 
 // Initialization
 
@@ -111,6 +111,15 @@ int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize)
     int bytesReturned = 0;
     if(CLIENT_QueryDevState(login_id, command, (char*)outBuff, outBuffSize, &bytesReturned, 5000)) {
         return bytesReturned;
+    }
+
+    return 0;
+}
+
+int DH_QueryRecordFiles(long login_id,  struct query_record_file_in* in,
+                        query_record_file_out* out, int timeout) {
+    if (CLIENT_QueryRecordFileEx(login_id, (NET_IN_QUERY_RECORD_FILE_EX*)in, (NET_OUT_QUERY_RECORD_FILE_EX*)out, timeout)) {
+        return 1;
     }
 
     return 0;

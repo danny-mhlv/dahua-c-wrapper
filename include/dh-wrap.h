@@ -42,6 +42,8 @@ int DH_ParseConfigJSON(char* command, char* inBuff, void* outBuffer, unsigned in
 
 int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize);
 
+int DH_QueryRecordFiles(long login_id,  struct query_record_file_in* in, query_record_file_out* out, int timeout);
+
 void DH_SetEventListener(event_listen_cb_t callback, long user_param);
 
 int DH_StartEventListen(long login_id);
