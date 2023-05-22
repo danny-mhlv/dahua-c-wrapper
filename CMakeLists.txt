@@ -9,8 +9,7 @@ set(${WRAPPER_NAME}_SRC
         src/default-callbacks.cpp)
 
 set(${WRAPPER_NAME}_INC
-        include/dh-wrap.h
-        test/main.cpp)
+        include/dh-wrap.h)
 
 add_library(${WRAPPER_NAME} SHARED ${${WRAPPER_NAME}_SRC} ${${WRAPPER_NAME}_INC})
 
@@ -32,9 +31,3 @@ install(TARGETS ${WRAPPER_NAME}
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/include" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${WRAPPER_NAME}"
         FILES_MATCHING PATTERN "*.h"
 )
-
-add_executable(test test/main.cpp)
-
-target_include_directories(test PUBLIC "${CMAKE_INSTALL_INCLUDEDIR}/dahua-c-wrapper/include")
-target_link_directories(test PUBLIC "/usr/local/lib/dahua-c-wrapper")
-target_link_libraries(test dahua-c-wrapper)
