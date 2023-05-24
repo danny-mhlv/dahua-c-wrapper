@@ -44,6 +44,8 @@ int DH_QueryDevState(long login_id, int command, void* outBuff, int outBuffSize)
 
 int DH_QueryRecordFiles(long login_id,  struct query_record_file_in* in, query_record_file_out* out, int timeout);
 
+int DH_FindRecordFiles(long login_id, enum file_query_type type, find_file_in* query, find_file_out* resultList, int resultListLength, int timeout);
+
 void DH_SetEventListener(event_listen_cb_t callback, long user_param);
 
 int DH_StartEventListen(long login_id);

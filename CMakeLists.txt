@@ -9,8 +9,7 @@ set(${WRAPPER_NAME}_SRC
         src/default-callbacks.cpp)
 
 set(${WRAPPER_NAME}_INC
-        include/dh-wrap.h
-)
+        include/dh-wrap.h)
 
 add_library(${WRAPPER_NAME} SHARED ${${WRAPPER_NAME}_SRC} ${${WRAPPER_NAME}_INC})
 

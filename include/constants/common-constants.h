@@ -6,6 +6,9 @@
 #define EXPAND(x, y) CONCAT(x, y)
 #define RESERVED EXPAND(reserved, __LINE__)
 
+#define MAX_PATH 260
+#define MAX_FILE_SUMMARY_NUM 32
+
 #define DH_DEVICE_ID_LEN 128
 #define DH_DEVICE_NAME_LEN 64
 
@@ -30,5 +33,20 @@
 #define DH_MAX_SERIAL_NUM_LEN 48
 
 #define DH_MAX_PATH_LEN 260
+
+/**
+ * Card constants
+ */
+#define DH_MAX_CARD_INFO_LEN 256
+#define MAX_CARD_RECORD_FIELD_NUM 16
+
+/**
+ * IVS Events constants
+ */
+#define MAX_IVS_EVENT_NUM 256
+
+#define MAX_QUERY_USER_NUM 4
+
+#define DH_NEW_USER_NAME_LENGTH	 128
 
 #endif // COMMON_CONSTANTS_H

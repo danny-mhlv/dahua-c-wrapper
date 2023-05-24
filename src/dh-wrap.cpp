@@ -125,6 +125,29 @@ int DH_QueryRecordFiles(long login_id,  struct query_record_file_in* in,
     return 0;
 }
 
+int DH_FindRecordFiles(long login_id, enum file_query_type type, find_file_in* query, find_file_out* resultList, int resultListLength, int timeout) {
+    for (int i = 0; i < 10; i++) {
+        if (&(resultList[i])) resultList[i].size = sizeof(find_file_out);
+    }
+
+    long find_handle = CLIENT_FindFileEx(login_id, (EM_FILE_QUERY_TYPE)type, (void*)query, nullptr, timeout);
+    if (!find_handle) {
+        return 0;
+    }
+
+    int result = 0;
+    for (int i = 0; i < resultListLength; i++) {
+        result = CLIENT_FindNextFileEx(find_handle, 1, (void*)(&(resultList[i])), sizeof(find_file_out), nullptr, timeout*10);
+        if (result == -1) return 0;
+    }
+
+    if (!CLIENT_FindCloseEx(find_handle)) {
+        return 0;
+    }
+
+    return 1;
+}
+
 int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type, struct time_stamp *from,
                        struct time_stamp *to, char *save_path) {
     int streamType = 0;
