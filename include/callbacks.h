@@ -67,6 +67,16 @@ void default_cb_download_pos(long handle, unsigned int total_size, unsigned int 
 int default_cb_download_data(long handle, unsigned int data_type, unsigned char *buff, unsigned int buff_size,
                              long file_path);
 
+/**
+ * Default download by record callback
+ * @callback_type ??? (CPP Refactor on the way)
+ * @param handle
+ * @param total_size
+ * @param download_size
+ * @param isLoading
+ */
+void default_cb_download_record_pos(long handle, unsigned int total_size, unsigned int download_size, long isLoading);
+
 #ifdef __cplusplus
 }
 #endif

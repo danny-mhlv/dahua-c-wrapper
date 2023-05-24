@@ -9,6 +9,12 @@ void default_cb_download_pos(long handle, unsigned int total_size, unsigned int 
     }
 }
 
+void default_cb_download_record_pos(long handle, unsigned int total_size, unsigned int download_size, long isLoading) {
+    if (download_size == -1) {
+        *((bool*)isLoading) = false;
+    }
+}
+
 int default_cb_download_data(long handle, unsigned int data_type, unsigned char* buff, unsigned int buff_size,
                              long file_path) {
     std::ofstream file((char*)file_path, std::ios::binary | std::ios::app);
@@ -26,3 +32,4 @@ int default_cb_download_data(long handle, unsigned int data_type, unsigned char*
     file.close();
     return int(gotData);
 }
+
