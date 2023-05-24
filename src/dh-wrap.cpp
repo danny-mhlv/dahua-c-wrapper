@@ -169,6 +169,29 @@ int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type
     return 1;
 }
 
+int DH_DownloadByRecordFiles(long login_id, record_info* recordInfo, const char *save_path) {
+    int streamType = 0;
+    bool loading = true;
+
+    if (!recordInfo) {
+        return 0;
+    }
+
+    DH_SetDeviceMode(login_id, MODE_RECORD_STREAM_TYPE, &streamType);
+    long handle = CLIENT_DownloadByRecordFileEx(login_id, (LPNET_RECORDFILE_INFO)recordInfo, nullptr,
+                                                (fDownLoadPosCallBack) default_cb_download_record_pos, (long)&loading,
+                                                (fDataCallBack) default_cb_download_data, (long)save_path);
+
+    if (handle) {
+        while(loading) {}
+        DH_StopDownload(handle);
+    }
+
+    if (DH_GetLastError() != 0) return 0;
+
+    return 1;
+}
+
 void DH_SetEventListener(event_listen_cb_t callback, long user_param) {
     CLIENT_SetDVRMessCallBackEx2((fMessCallBackEx2)callback, user_param);
 }
