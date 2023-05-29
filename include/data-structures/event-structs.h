@@ -54,4 +54,18 @@ struct event_new_file {
     char            fileName[128];
 };
 
+/**
+ * Event info
+ * @dahua_name tagEVENT_INFO
+ * @param type - Event type (Intelligent analysis event [IVS])
+ * @param objectType - List of objects present in the event
+ * @param objectCount - Number of objects present in the event
+ */
+struct event_info {
+    int                 type;
+    enum object_type    objectType[16];
+    int					objectCount;
+    unsigned char		RESERVED[512];
+};
+
 #endif // EVENT_STRUCTS_H

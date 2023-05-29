@@ -1,9 +1,15 @@
-#include "callbacks.h"
+#include "../include/callbacks.h"
 
 #include <fstream>
 
 void default_cb_download_pos(long handle, unsigned int total_size, unsigned int download_size, int index,
                              struct record_info file_info, long isLoading) {
+    if (download_size == -1) {
+        *((bool*)isLoading) = false;
+    }
+}
+
+void default_cb_download_record_pos(long handle, unsigned int total_size, unsigned int download_size, long isLoading) {
     if (download_size == -1) {
         *((bool*)isLoading) = false;
     }
@@ -26,3 +32,4 @@ int default_cb_download_data(long handle, unsigned int data_type, unsigned char*
     file.close();
     return int(gotData);
 }
+
