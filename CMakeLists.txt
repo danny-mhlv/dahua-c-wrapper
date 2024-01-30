@@ -32,7 +32,10 @@ find_library(DAHUA_LIBS
 		${DAHUA_LIB_PATH}
 	REQUIRED
 )
-target_link_libraries(${WRAPPER_NAME} dhnetsdk dhconfigsdk)
+target_link_libraries(${WRAPPER_NAME}
+	PUBLIC
+		${DAHUA_LIBS}
+)
 
 install(TARGETS ${WRAPPER_NAME}
 	EXPORT ${WRAPPER_NAME}
