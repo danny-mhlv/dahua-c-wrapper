@@ -26,6 +26,8 @@ int DH_SetDeviceMode(long login_id, enum use_device_mode mode, void* value);
 int DH_DownloadByTime(long login_id, int channel_id, enum query_record_type type,
                        struct time_stamp* from, struct time_stamp* to, char* save_path);
 
+int DH_DownloadByRecordFiles(long login_id, record_info* recordInfo, const char *save_path);
+
 int DH_StopDownload(long download_handle);
 
 unsigned int DH_GetLastError();
