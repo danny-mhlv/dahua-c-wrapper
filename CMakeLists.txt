@@ -15,7 +15,7 @@ add_library(${WRAPPER_NAME} SHARED ${${WRAPPER_NAME}_SRC} ${${WRAPPER_NAME}_INC}
 
 target_link_options(${WRAPPER_NAME} PUBLIC -Wl,--no-as-needed -Wl,--export-dynamic)
 
-set(DAHUA_INC_PATH "${CMAKE_INSTALL_INCLUDEDIR}/dahua" CACHE PATH "Dahua SDK include directory")
+set(DAHUA_INC_PATH "${CMAKE_INSTALL_INCLUDEDIR}" CACHE PATH "Dahua SDK include directory")
 set(DAHUA_LIB_PATH "${CMAKE_INSTALL_LIBDIR}" CACHE PATH "Dahua SDK library directory")
 
 # External dependency (Original Dahua library)
@@ -24,17 +24,13 @@ target_include_directories(${WRAPPER_NAME}
 		${DAHUA_INC_PATH}
 )
 
-find_library(DAHUA_LIBS
-	NAMES
-		dhnetsdk
-		dhconfigsdk
-	HINTS
-		${DAHUA_LIB_PATH}
-	REQUIRED
-)
+find_library(DAHUA_NET_SDK dhnetsdk	HINTS ${DAHUA_LIB_PATH} REQUIRED)
+find_library(DAHUA_CONFIG_SDK dhconfigsdk HINTS ${DAHUA_LIB_PATH} REQUIRED)
+
 target_link_libraries(${WRAPPER_NAME}
 	PUBLIC
-		${DAHUA_LIBS}
+		${DAHUA_NET_SDK}
+		${DAHUA_CONFIG_SDK}
 )
 
 install(TARGETS ${WRAPPER_NAME}
