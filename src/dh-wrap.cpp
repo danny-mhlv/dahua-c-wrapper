@@ -126,7 +126,7 @@ int DH_QueryRecordFiles(long login_id,  struct query_record_file_in* in,
 }
 
 int DH_FindRecordFiles(long login_id, enum file_query_type type, find_file_in* query, find_file_out* resultList, int resultListLength, int timeout) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < resultListLength; i++) {
         if (&(resultList[i])) resultList[i].size = sizeof(find_file_out);
     }
 
@@ -139,6 +139,7 @@ int DH_FindRecordFiles(long login_id, enum file_query_type type, find_file_in* q
     for (int i = 0; i < resultListLength; i++) {
         result = CLIENT_FindNextFileEx(find_handle, 1, (void*)(&(resultList[i])), sizeof(find_file_out), nullptr, timeout*10);
         if (result == -1) return 0;
+        if (result == 0) break;
     }
 
     if (!CLIENT_FindCloseEx(find_handle)) {
